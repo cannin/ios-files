@@ -1,4 +1,4 @@
-module ios-files
+module github.com/cannin/ios-files
 
 go 1.24.0
 

@@ -4,17 +4,24 @@
 history from local Finder or iTunes iOS backups. It supports encrypted and
 unencrypted backups and processes both locally.
 
-## Quick start
+## Install
+
+Install the latest version with Go 1.24 or newer.
+
+```sh
+go install github.com/cannin/ios-files@latest
+```
+
+Add Go's binary directory to your `PATH`. Go uses `GOBIN` when set and the
+`bin` directory under `GOPATH` otherwise.
 
 Prebuilt binaries are available for Linux, macOS, and Windows on AMD64 and
 ARM64. [GitHub Releases](https://github.com/cannin/ios-files/releases)
 
-Install Go 1.24 or newer and Make, then run these commands from the repository
-root:
+## Quick start
 
 ```sh
-make -C go current
-./go/dist/ios-files --output-dir output
+ios-files --output-dir output
 ```
 
 This exports the camera roll from the newest backup under
@@ -27,7 +34,7 @@ Select a backup directory containing `Manifest.plist` and `Manifest.db`, or
 provide a parent directory to select its newest backup.
 
 ```sh
-./go/dist/ios-files --backup /path/to/backup --output-dir /path/to/export
+ios-files --backup /path/to/backup --output-dir /path/to/export
 ```
 
 Add `--call-history` to export `call_history.sqlite` alongside the camera roll.
@@ -35,8 +42,8 @@ Use `--call-history --camera-roll=false` to export only call history.
 
 For an encrypted backup, you can supply a password from a protected file with
 `--password-file /path/to/password.txt`. Use `--password-file -` to read it from
-standard input. Unencrypted backups skip password input. Run
-`./go/dist/ios-files -h` to see all options.
+standard input. Unencrypted backups skip password input. Run `ios-files -h`
+to see all options.
 
 ## Configuration
 
@@ -67,16 +74,19 @@ the tool stores a decrypted copy of `Manifest.db` in a restricted temporary
 file. Normal shutdown removes the file. An interruption can leave it in the
 system temporary directory.
 
-## Release builds
+## Build from source
+
+Run `make current` from the repository root to build `dist/ios-files` for your
+system.
 
 ```sh
-make -C go all
+make all
 ```
 
-This runs the tests and rebuilds `go/dist/` with Linux, macOS, and Windows binaries
-for AMD64 and ARM64, plus a native build for the current system.
+`make all` runs the tests and rebuilds `dist/` with Linux, macOS, and Windows
+binaries for AMD64 and ARM64, plus a native build for the current system.
 
-Pushing a tag such as `v0.1.0` runs the release workflow and publishes the six
+Pushing a version tag runs the release workflow and publishes the six
 platform binaries on GitHub.
 
 ## Acknowledgments

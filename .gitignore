@@ -38,14 +38,13 @@ go.work.sum
 /go/README.md
 
 # Local legacy scripts and Python dependencies.
-/ios_files.py
-/Pipfile
-/Pipfile.lock
+/ignore_python_code/
 /sshfs_linux.txt
 
 # Generated binaries, diagnostics, and Finder metadata.
+/dist/
+/ios-files
 /go/dist/
-/go/ios-files
 ios-files-debug-*.jsonl
 .DS_Store
 
